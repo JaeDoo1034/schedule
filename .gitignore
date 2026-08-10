@@ -1,0 +1,43 @@
+# Dependencies
+**/node_modules/
+
+# Build output
+**/dist/
+**/target/
+**/*.tsbuildinfo
+
+# Generated Vite config output
+DEV/vite.config.js
+DEV/vite.config.d.ts
+
+# Local environment and secrets
+**/.env
+**/.env.*
+!**/.env.example
+
+# My Planner local workspace/index data
+**/.planner/
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/*.sqlite
+**/*.sqlite3
+
+# Local models and native binaries
+**/*.gguf
+
+# Logs and temporary files
+**/*.log
+**/.cache/
+**/tmp/
+**/temp/
+
+# Editor and OS metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+
+# Test coverage
+**/coverage/

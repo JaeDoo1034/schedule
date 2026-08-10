@@ -22,4 +22,18 @@ User Action
 → UI Refresh/Event
 ```
 
+```mermaid
+flowchart LR
+    A[사용자 행동] --> B[UI 입력 검증]
+    B --> C[Tauri IPC]
+    C --> D[Core 검증]
+    D --> E[Domain Operation]
+    E --> F[Atomic Markdown Commit]
+    F --> G[SQLite Projection]
+    G --> H[UI Refresh / Event]
+    G -. 실패 .-> I[Index Dirty 표시]
+    I --> J[증분 재색인]
+    J --> H
+```
+
 Markdown commit이 성공한 시점이 원본 변경의 기준이다. SQLite 반영 실패는 원본 실패가 아니며 재색인으로 복구한다.

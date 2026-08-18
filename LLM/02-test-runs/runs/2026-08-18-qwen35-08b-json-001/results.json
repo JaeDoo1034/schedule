@@ -1,0 +1,177 @@
+{
+  "suite_id": "qwen35-08b-json-001",
+  "executed_at": "2026-08-18T22:42:00+09:00",
+  "environment": {
+    "runtime": "llama.cpp",
+    "runtime_build": "b10489-169e4a7ff",
+    "model": "Qwen3.5-0.8B-Q4_0.gguf",
+    "inference": "CPU only",
+    "threads": 4,
+    "context_tokens": 2048,
+    "max_output_tokens": 180,
+    "temperature": 0,
+    "reasoning": false
+  },
+  "summary": {
+    "total": 5,
+    "process_success": 5,
+    "json_parse_pass": 5,
+    "top_level_schema_pass": 5,
+    "semantic_pass": 2,
+    "semantic_fail": 3,
+    "json_parse_rate": 1.0,
+    "top_level_schema_rate": 1.0,
+    "semantic_rate": 0.4
+  },
+  "results": [
+    {
+      "id": "T01_CREATE_EVENT",
+      "input": "내일 오후 3시에 병원 예약 등록해줘",
+      "output": {
+        "schema_version": 1,
+        "intent": "CREATE_EVENT",
+        "confidence": 0.95,
+        "arguments": {
+          "title": "병원 예약",
+          "date_expression": "내일 오후 3시"
+        },
+        "missing_fields": [],
+        "requires_confirmation": true
+      },
+      "metrics": {
+        "prompt_tokens_per_second": 666.5,
+        "generation_tokens_per_second": 97.8
+      },
+      "validation": {
+        "process": "pass",
+        "json_parse": "pass",
+        "top_level_schema": "pass",
+        "semantic": "fail"
+      },
+      "issues": [
+        "start_time 15:00을 별도 필드로 추출하지 않았다.",
+        "date_expression에 날짜와 시각을 함께 넣었다.",
+        "필수 start_time이 없지만 missing_fields가 비어 있다."
+      ]
+    },
+    {
+      "id": "T02_CREATE_TASK",
+      "input": "다음주 금요일까지 보고서 작성 업무를 중요로 등록해줘",
+      "output": {
+        "schema_version": 1,
+        "intent": "CREATE_EVENT",
+        "confidence": 0.95,
+        "arguments": {
+          "title": "보고서 작성 업무",
+          "date_expression": "다음주 금요일"
+        },
+        "missing_fields": [],
+        "requires_confirmation": true
+      },
+      "metrics": {
+        "prompt_tokens_per_second": 661.6,
+        "generation_tokens_per_second": 98.4
+      },
+      "validation": {
+        "process": "pass",
+        "json_parse": "pass",
+        "top_level_schema": "pass",
+        "semantic": "fail"
+      },
+      "issues": [
+        "수행 업무를 CREATE_TASK가 아닌 CREATE_EVENT로 분류했다.",
+        "중요도 high를 추출하지 않았다.",
+        "title에서 일반 분류어인 업무를 제거하지 않았다."
+      ]
+    },
+    {
+      "id": "T03_MISSING_TIME",
+      "input": "다음주 화요일에 팀 회의 잡아줘",
+      "output": {
+        "schema_version": 1,
+        "intent": "CREATE_EVENT",
+        "confidence": 0.95,
+        "arguments": {
+          "title": "팀 회의",
+          "date_expression": "다음주 화요일",
+          "start_time": "14:00"
+        },
+        "missing_fields": [],
+        "requires_confirmation": true
+      },
+      "metrics": {
+        "prompt_tokens_per_second": 664.8,
+        "generation_tokens_per_second": 98.6
+      },
+      "validation": {
+        "process": "pass",
+        "json_parse": "pass",
+        "top_level_schema": "pass",
+        "semantic": "fail"
+      },
+      "issues": [
+        "입력에 없는 start_time 14:00을 생성했다.",
+        "start_time을 missing_fields에 넣지 않았다.",
+        "System prompt 예시의 14:00을 복사한 것으로 추정된다."
+      ]
+    },
+    {
+      "id": "T04_AMBIGUOUS",
+      "input": "다음주에 회의 하나 잡아줘",
+      "output": {
+        "schema_version": 1,
+        "intent": "CREATE_EVENT",
+        "confidence": 0.95,
+        "arguments": {
+          "title": "팀 회의",
+          "date_expression": "다음주 화요일",
+          "start_time": "14:00"
+        },
+        "missing_fields": [],
+        "requires_confirmation": true
+      },
+      "metrics": {
+        "prompt_tokens_per_second": 661.5,
+        "generation_tokens_per_second": 96.8
+      },
+      "validation": {
+        "process": "pass",
+        "json_parse": "pass",
+        "top_level_schema": "pass",
+        "semantic": "fail"
+      },
+      "issues": [
+        "입력에 없는 팀이라는 제목 수식을 생성했다.",
+        "입력에 없는 화요일을 생성했다.",
+        "입력에 없는 14:00을 생성했다.",
+        "모호한 날짜와 누락 시각을 missing_fields에 표시하지 않았다.",
+        "System prompt의 전체 예시를 복사한 것으로 추정된다."
+      ]
+    },
+    {
+      "id": "T05_QUERY",
+      "input": "내일 예정된 일정 보여줘",
+      "output": {
+        "schema_version": 1,
+        "intent": "QUERY_SCHEDULE",
+        "confidence": 0.95,
+        "arguments": {
+          "date_expression": "내일"
+        },
+        "missing_fields": [],
+        "requires_confirmation": false
+      },
+      "metrics": {
+        "prompt_tokens_per_second": 661.3,
+        "generation_tokens_per_second": 98.1
+      },
+      "validation": {
+        "process": "pass",
+        "json_parse": "pass",
+        "top_level_schema": "pass",
+        "semantic": "pass"
+      },
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "suite_id": "qwen35-08b-json-001",
+  "model": "Qwen3.5-0.8B-Q4_0",
+  "cases": [
+    {
+      "id": "T01_CREATE_EVENT",
+      "input": "내일 오후 3시에 병원 예약 등록해줘",
+      "expected": {
+        "intent": "CREATE_EVENT",
+        "arguments": {
+          "title": "병원 예약",
+          "date_expression": "내일",
+          "start_time": "15:00"
+        },
+        "missing_fields": [],
+        "requires_confirmation": true
+      }
+    },
+    {
+      "id": "T02_CREATE_TASK",
+      "input": "다음주 금요일까지 보고서 작성 업무를 중요로 등록해줘",
+      "expected": {
+        "intent": "CREATE_TASK",
+        "arguments": {
+          "title": "보고서 작성",
+          "date_expression": "다음주 금요일",
+          "importance": "high"
+        },
+        "missing_fields": [],
+        "requires_confirmation": true
+      }
+    },
+    {
+      "id": "T03_MISSING_TIME",
+      "input": "다음주 화요일에 팀 회의 잡아줘",
+      "expected": {
+        "intent": "CREATE_EVENT",
+        "arguments": {
+          "title": "팀 회의",
+          "date_expression": "다음주 화요일"
+        },
+        "missing_fields": ["start_time"],
+        "requires_confirmation": true,
+        "must_not_contain": {
+          "start_time": "입력에 시각이 없으므로 생성 금지"
+        }
+      }
+    },
+    {
+      "id": "T04_AMBIGUOUS",
+      "input": "다음주에 회의 하나 잡아줘",
+      "expected": {
+        "intent": "CREATE_EVENT",
+        "arguments": {
+          "date_expression": "다음주"
+        },
+        "missing_fields": ["date_expression", "start_time"],
+        "requires_confirmation": true,
+        "must_not_invent": ["구체적인 요일", "구체적인 시각", "팀이라는 제목 수식"]
+      }
+    },
+    {
+      "id": "T05_QUERY",
+      "input": "내일 예정된 일정 보여줘",
+      "expected": {
+        "intent": "QUERY_SCHEDULE",
+        "arguments": {
+          "date_expression": "내일"
+        },
+        "missing_fields": [],
+        "requires_confirmation": false
+      }
+    }
+  ]
+}

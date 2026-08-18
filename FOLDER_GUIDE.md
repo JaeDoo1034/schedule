@@ -89,12 +89,13 @@ Local LLM을 실제로 실행하고 평가한 방법과 결과를 관리합니�
 
 `work_concept/`는 LLM의 구조와 역할을, `Constraint/`는 LLM이 지켜야 할 조건을 설명합니다. `LLM/`은 그 설계와 제약을 실제 모델로 어떻게 시험했고 어떤 결과를 얻었는지 기록합니다. GGUF 모델 파일과 native binary는 이 폴더에 커밋하지 않습니다.
 
-`LLM/` 내부는 다음 세 책임으로 분리합니다.
+`LLM/` 내부는 다음 네 책임으로 분리합니다.
 
 ```text
 01-llama-cpp-guide/  # llama.cpp 설치와 사용 방법
 02-test-runs/        # 실제 모델 테스트 실행 내역
 03-test-case-design/ # 테스트 케이스와 판정 방식 설계
+04-references/       # Local LLM 관련 논문과 연구 근거
 ```
 
 이 영역의 시작 문서는 `LLM/LOCAL_LLM_OVERVIEW.md`입니다.

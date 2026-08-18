@@ -278,6 +278,7 @@ schedule/
 - [터미널 사용법](LLM/01-llama-cpp-guide/terminal-usage.md)
 - [테스트 실행 내역](LLM/02-test-runs/README.md)
 - [테스트 케이스 설계](LLM/03-test-case-design/README.md)
+- [Few-shot 예시 복사와 연구 근거](LLM/04-references/few-shot-demonstration-copy-bias.md)
 
 ## 목업 실행
 

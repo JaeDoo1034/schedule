@@ -29,6 +29,19 @@ Run 이름의 `purpose` 부분도 이 목적을 반영한다.
 
 다음 계층을 구분해서 평가한다.
 
+```mermaid
+flowchart LR
+    A[모델 실행] --> B{Process 통과}
+    B -- 아니오 --> X[PROCESS_ERROR]
+    B -- 예 --> C{Syntax 통과}
+    C -- 아니오 --> Y[INVALID_JSON]
+    C -- 예 --> D{Schema 통과}
+    D -- 아니오 --> Z[SCHEMA_ERROR]
+    D -- 예 --> E{Semantic 통과}
+    E -- 아니오 --> F[Intent · Field · Policy 오류 분류]
+    E -- 예 --> G[최종 통과]
+```
+
 ### Process
 
 - 모델이 정상적으로 load되는가?
@@ -349,4 +362,3 @@ UNEXPECTED_TEXT
 - [ ] 입력에 없는 값의 생성을 확인했다.
 - [ ] 실패 결과도 삭제하지 않았다.
 - [ ] 다음 Run에서 바꿀 항목을 하나 이상 기록했다.
-

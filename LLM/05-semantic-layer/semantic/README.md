@@ -20,15 +20,15 @@ YAML을 새로 만들거나 기존 Concept를 확장하기 전에 반드시 [Sem
 
 ## 변경 순서
 
-```text
-요구사항 정의
-→ Concept와 canonical 이름 결정
-→ alias 및 필요한 context 정의
-→ resolver/Tool 계약 연결
-→ policy 정의
-→ Schema와 Application validator 반영
-→ 정상·별칭·경계·거부 테스트 추가
-→ 문서와 version 갱신
+```mermaid
+flowchart LR
+    A[요구사항 정의] --> B[Concept · canonical 결정]
+    B --> C[Alias · Context 정의]
+    C --> D[Resolver · Tool 계약 연결]
+    D --> E[Policy 정의]
+    E --> F[Schema · Validator 반영]
+    F --> G[정상 · 별칭 · 경계 · 거부 테스트]
+    G --> H[문서 · Version 갱신]
 ```
 
 YAML만 수정해서 기능이 완성되는 것은 아니다. YAML은 의미 계약이며, Application validator와 결정적 Tool이 이를 실제로 집행해야 한다.

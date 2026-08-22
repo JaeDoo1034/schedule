@@ -89,16 +89,17 @@ LLM은 다음 작업을 직접 수행하지 않는다.
 
 기본 처리 경계는 다음과 같다.
 
-```text
-사용자 자연어
-→ LLM Intent 추출
-→ Schema와 allowlist 검증
-→ DateResolver와 대상 조회
-→ Domain dry-run validation
-→ 변경 Preview
-→ 사용자 확인
-→ version 재검증
-→ Domain operation과 저장
+```mermaid
+flowchart LR
+    A[사용자 자연어] --> B[LLM Intent 추출]
+    B --> C[Schema · Allowlist 검증]
+    C --> D[DateResolver · 대상 조회]
+    D --> E[Domain Dry-run Validation]
+    E --> F[변경 Preview]
+    F --> G{사용자 확인}
+    G -- 승인 --> H[Version 재검증]
+    G -- 취소 --> X[변경 없음]
+    H --> I[Domain Operation · 저장]
 ```
 
 - LLM 응답 자체에는 실행 권한이 없다.
@@ -176,4 +177,3 @@ AI가 생성한 데이터와 UI에서 직접 생성한 데이터는 같은 상�
 - GPU 전용 기능
 
 이 항목을 추가하려면 4GB RAM, offline-first, 사용자 소유 데이터와 수동 기능 독립성이라는 상위 제약을 훼손하지 않는지 먼저 검토한다.
-

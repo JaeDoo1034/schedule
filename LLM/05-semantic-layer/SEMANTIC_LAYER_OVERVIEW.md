@@ -6,14 +6,16 @@
 
 ## 목표
 
-```text
-사용자 자연어
-→ SLM Semantic Parse
-→ Canonical Concept
-→ Deterministic Tool
-→ Domain Validation
-→ Preview
-→ 사용자 확인
+```mermaid
+flowchart LR
+    A[사용자 자연어] --> B[Semantic Parse]
+    B --> C[Canonical Concept]
+    C --> D[Deterministic Tool]
+    D --> E[Domain Validation]
+    E --> F[Preview]
+    F --> G{사용자 확인}
+    G -- 승인 --> H[일정 반영]
+    G -- 취소 --> I[변경 없음]
 ```
 
 SLM의 책임:
@@ -56,10 +58,11 @@ SLM이 하지 않는 일:
 
 ### 실제 날짜를 SLM에 요구하지 않는다
 
-```text
-오늘 → today
-내일 → tomorrow
-모레 → day_after_tomorrow
+```mermaid
+flowchart LR
+    A1[오늘] --> C1[today]
+    A2[내일] --> C2[tomorrow]
+    A3[모레] --> C3[day_after_tomorrow]
 ```
 
 이 단계의 성공 기준은 `today`를 `2026-08-22`로 만드는 것이 아니다. SLM이 `today`라는 canonical concept와 `resolve_relative_date` Tool 요청을 안정적으로 만드는 것이다.
@@ -87,6 +90,23 @@ Semantic YAML을 새로 만들거나 수정할 때는 [Semantic YAML Ground Rule
 
 YAML에 key를 추가하는 것만으로 기능이 완성되지는 않는다. Tool 명세, JSON Schema, Application consumer와 회귀 테스트가 그 key를 실제로 처리해야 한다.
 
+```mermaid
+flowchart TB
+    Y[Semantic Concept YAML<br/>Source Contract]
+    Y --> P[Prompt 구성]
+    Y --> V[Application Validator]
+    Y --> T[Tool 연결]
+    S[JSON Schema] --> V
+    TR[Tool YAML] --> T
+    P --> L[SLM Semantic Parse]
+    L --> V
+    V --> T
+    T --> D[Domain Validation]
+    TC[Test Cases] -. 회귀 검증 .-> Y
+    TC -. 회귀 검증 .-> V
+    TC -. 회귀 검증 .-> T
+```
+
 ### Tool 결과도 Domain 입력이다
 
 Tool이 계산한 날짜는 곧바로 파일에 저장되지 않는다. Intent와 다른 field를 합쳐 Domain validation과 Preview를 거친다.
@@ -95,10 +115,13 @@ Tool이 계산한 날짜는 곧바로 파일에 저장되지 않는다. Intent�
 
 첫 Run에서는 다음 표현만 평가한다.
 
-```text
-오늘 · 금일 → today
-내일 · 익일 → tomorrow
-모레 → day_after_tomorrow
+```mermaid
+flowchart LR
+    T1[오늘] --> TODAY[today]
+    T2[금일] --> TODAY
+    M1[내일] --> TOMORROW[tomorrow]
+    M2[익일] --> TOMORROW
+    D1[모레] --> DAT[day_after_tomorrow]
 ```
 
 이후 범위:

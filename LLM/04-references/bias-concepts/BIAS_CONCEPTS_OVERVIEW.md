@@ -22,28 +22,27 @@
 
 간단히 표현하면 다음과 같다.
 
-```text
-Copying bias
-→ 무엇을 복사했는가?
-
-Demonstration bias
-→ 어떤 예시를 골랐는가?
-
-Recency/majority bias
-→ 어떤 답이 최근이거나 많았는가?
-
-Order/position sensitivity
-→ 같은 예시를 어디에 어떤 순서로 놓았는가?
+```mermaid
+flowchart TB
+    B[Few-shot 출력 편향]
+    B --> C[Copying bias<br/>무엇을 복사했는가?]
+    B --> D[Demonstration bias<br/>어떤 예시를 골랐는가?]
+    B --> R[Recency · Majority bias<br/>어떤 답이 최근이거나 많았는가?]
+    B --> O[Order · Position sensitivity<br/>예시를 어디에 어떤 순서로 놓았는가?]
 ```
 
 ## 2. 공통 배경: Few-shot과 In-Context Learning
 
 Few-shot prompting은 prompt 안에 몇 개의 입력·출력 예시를 제공하는 방식이다.
 
-```text
-예시 입력 1 → 예시 출력 1
-예시 입력 2 → 예시 출력 2
-새 입력 → 모델이 생성할 출력
+```mermaid
+flowchart LR
+    E1[예시 입력 1] --> O1[예시 출력 1]
+    E2[예시 입력 2] --> O2[예시 출력 2]
+    O1 --> M[In-Context Learning]
+    O2 --> M
+    N[새 입력] --> M
+    M --> G[모델이 생성할 출력]
 ```
 
 모델 가중치를 다시 학습하지 않아도 예시를 보고 task의 형식과 규칙을 추정할 수 있다. 이를 In-Context Learning, ICL이라고 한다.
@@ -164,12 +163,13 @@ Demonstration bias는 어떤 예시를 선택했는지, 그 예시가 어떤 의
 
 Copying bias보다 상위에 있는 개념으로 이해할 수 있다.
 
-```text
-Demonstration bias
-├ 구체적인 답 복사
-├ 특정 Intent 선호
-├ 특정 형식 선호
-└ 예시가 암시한 잘못된 규칙 적용
+```mermaid
+flowchart TB
+    D[Demonstration bias]
+    D --> C[구체적인 답 복사]
+    D --> I[특정 Intent 선호]
+    D --> F[특정 형식 선호]
+    D --> W[예시가 암시한 잘못된 규칙 적용]
 ```
 
 ### 4.2 쉬운 예시
@@ -534,4 +534,3 @@ Few-shot 예시
 - [논문 근거 중심 상세 문서](../few-shot-demonstration-copy-bias.md)
 - [테스트 케이스 설계 가이드](../../03-test-case-design/README.md)
 - [JSON Test Run 001](../../02-test-runs/runs/2026-08-18-qwen35-08b-json-001/report.md)
-

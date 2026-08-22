@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-08-22-qwen35-08b-semantic-temporal-001",
+  "reference_datetime": "2026-08-22T12:00:00+09:00",
+  "timezone": "Asia/Seoul",
+  "slm_contract": {
+    "passed": 0,
+    "total": 6,
+    "observations": [
+      {"id":"TODAY_QUERY_001","result":"today 인식, original_text와 Tool 요청 누락"},
+      {"id":"TODAY_ALIAS_QUERY_001","result":"금일을 tomorrow로 오인, intent 및 구조 위반"},
+      {"id":"TOMORROW_QUERY_001","result":"내일을 today로 오인, 전체 계약 위반"},
+      {"id":"TOMORROW_ALIAS_QUERY_001","result":"tomorrow 인식, original_text와 Tool 요청 누락"},
+      {"id":"DAY_AFTER_TOMORROW_QUERY_001","result":"모레를 tomorrow로 오인, 구조 위반"},
+      {"id":"TOMORROW_CREATE_EVENT_001","result":"날짜는 맞지만 시간·장소 구조 임의 생성, Tool 요청 누락"}
+    ]
+  },
+  "deterministic_semantic_layer": {
+    "passed": 6,
+    "total": 6,
+    "results": [
+      {"id":"TODAY_QUERY_001","original_text":"오늘","canonical":"today","resolved_date":"2026-08-22","passed":true},
+      {"id":"TODAY_ALIAS_QUERY_001","original_text":"금일","canonical":"today","resolved_date":"2026-08-22","passed":true},
+      {"id":"TOMORROW_QUERY_001","original_text":"내일","canonical":"tomorrow","resolved_date":"2026-08-23","passed":true},
+      {"id":"TOMORROW_ALIAS_QUERY_001","original_text":"익일","canonical":"tomorrow","resolved_date":"2026-08-23","passed":true},
+      {"id":"DAY_AFTER_TOMORROW_QUERY_001","original_text":"모레","canonical":"day_after_tomorrow","resolved_date":"2026-08-24","passed":true},
+      {"id":"TOMORROW_CREATE_EVENT_001","original_text":"내일","canonical":"tomorrow","resolved_date":"2026-08-23","passed":true}
+    ]
+  },
+  "llama_cpp_schema_sampler": {
+    "status": "incompatible_in_this_run",
+    "version": "b10489-169e4a7ff",
+    "error": "Failed to initialize samplers: std::exception",
+    "note": "SLM 원본 비교는 prompt-only JSON으로 실행했다."
+  }
+}

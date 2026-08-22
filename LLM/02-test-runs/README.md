@@ -19,6 +19,7 @@ LLM/02-test-runs/
 
 현재 Run:
 
+- [2026-08-22-qwen35-08b-semantic-temporal-001](runs/2026-08-22-qwen35-08b-semantic-temporal-001/README.md): 상대 날짜 SLM 단독(0/6)과 YAML 결정적 처리(6/6) 비교
 - [2026-08-18-qwen35-08b-smoke-001](runs/2026-08-18-qwen35-08b-smoke-001/README.md): Qwen3.5-0.8B 최초 CPU smoke test
 - [2026-08-18-qwen35-08b-json-001](runs/2026-08-18-qwen35-08b-json-001/README.md): Qwen3.5-0.8B 첫 JSON 구조 테스트
 

@@ -19,13 +19,15 @@ LLM/
 ├ 01-llama-cpp-guide/
 ├ 02-test-runs/
 ├ 03-test-case-design/
-└ 04-references/
+├ 04-references/
+└ 05-semantic-layer/
 ```
 
 1. [01-llama-cpp-guide/](01-llama-cpp-guide/README.md): `llama.cpp` 설치, 터미널 사용과 공통 실행 방법
 2. [02-test-runs/](02-test-runs/README.md): 날짜·모델·목적별로 분리한 실제 테스트 실행 내역
 3. [03-test-case-design/](03-test-case-design/README.md): 테스트 문장, 기대값, 판정 기준과 지표 설계 방법
 4. [04-references/](04-references/REFERENCE_OVERVIEW.md): Local LLM 현상을 해석하는 논문과 연구 근거
+5. [05-semantic-layer/](05-semantic-layer/SEMANTIC_LAYER_OVERVIEW.md): 일정관리 의미 YAML, Tool 계약과 결정적 날짜 해석. YAML 확장 시 [Semantic YAML Ground Rules](05-semantic-layer/semantic/SEMANTIC_YAML_GROUND_RULES.md)를 적용한다.
 
 ## 문서 분류 기준
 
@@ -41,6 +43,9 @@ llama.cpp를 어떻게 실행하는가?
 
 실험 결과를 어떤 논문과 연구 개념으로 해석하는가?
 └─ 04-references/
+
+자연어 의미와 결정적 Tool 실행 경계를 어떻게 정의하는가?
+└─ 05-semantic-layer/
 ```
 
 ## 현재 상태

@@ -1,0 +1,75 @@
+{
+  "suite_id": "semantic-temporal-ko-001",
+  "reference_datetime": "2026-08-22T12:00:00+09:00",
+  "timezone": "Asia/Seoul",
+  "cases": [
+    {
+      "id": "TODAY_QUERY_001",
+      "input": "오늘 일정 보여줘",
+      "expected": {
+        "intent": "QUERY_SCHEDULE",
+        "canonical": "today",
+        "original_text": "오늘",
+        "resolved_date": "2026-08-22",
+        "requires_confirmation": false
+      }
+    },
+    {
+      "id": "TODAY_ALIAS_QUERY_001",
+      "input": "금일 예정된 일정 알려줘",
+      "expected": {
+        "intent": "QUERY_SCHEDULE",
+        "canonical": "today",
+        "original_text": "금일",
+        "resolved_date": "2026-08-22",
+        "requires_confirmation": false
+      }
+    },
+    {
+      "id": "TOMORROW_QUERY_001",
+      "input": "내일 일정 보여줘",
+      "expected": {
+        "intent": "QUERY_SCHEDULE",
+        "canonical": "tomorrow",
+        "original_text": "내일",
+        "resolved_date": "2026-08-23",
+        "requires_confirmation": false
+      }
+    },
+    {
+      "id": "TOMORROW_ALIAS_QUERY_001",
+      "input": "익일 일정을 확인해줘",
+      "expected": {
+        "intent": "QUERY_SCHEDULE",
+        "canonical": "tomorrow",
+        "original_text": "익일",
+        "resolved_date": "2026-08-23",
+        "requires_confirmation": false
+      }
+    },
+    {
+      "id": "DAY_AFTER_TOMORROW_QUERY_001",
+      "input": "모레 일정 보여줘",
+      "expected": {
+        "intent": "QUERY_SCHEDULE",
+        "canonical": "day_after_tomorrow",
+        "original_text": "모레",
+        "resolved_date": "2026-08-24",
+        "requires_confirmation": false
+      }
+    },
+    {
+      "id": "TOMORROW_CREATE_EVENT_001",
+      "input": "내일 오후 3시에 병원 예약 등록해줘",
+      "expected": {
+        "intent": "CREATE_EVENT",
+        "canonical": "tomorrow",
+        "original_text": "내일",
+        "start_time": "15:00",
+        "resolved_date": "2026-08-23",
+        "requires_confirmation": true
+      }
+    }
+  ]
+}
+

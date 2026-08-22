@@ -1,0 +1,7 @@
+{
+  "source": "../../../../05-semantic-layer/tests/temporal-test-cases.json",
+  "suite_id": "semantic-temporal-ko-001",
+  "reference_datetime": "2026-08-22T12:00:00+09:00",
+  "timezone": "Asia/Seoul",
+  "case_ids": ["TODAY_QUERY_001", "TODAY_ALIAS_QUERY_001", "TOMORROW_QUERY_001", "TOMORROW_ALIAS_QUERY_001", "DAY_AFTER_TOMORROW_QUERY_001", "TOMORROW_CREATE_EVENT_001"]
+}

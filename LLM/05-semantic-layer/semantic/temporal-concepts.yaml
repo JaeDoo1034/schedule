@@ -1,0 +1,55 @@
+semantic_layer:
+  id: my_planner_temporal
+  version: 1
+  locale: ko-KR
+
+context:
+  reference_datetime:
+    source: application
+    type: datetime
+    required: true
+    llm_must_not_generate: true
+
+  timezone:
+    source: workspace
+    type: iana_timezone
+    required: true
+    llm_must_not_generate: true
+
+concepts:
+  relative_date:
+    today:
+      canonical: today
+      aliases:
+        - 오늘
+        - 금일
+      offset_days: 0
+      resolver: resolve_relative_date
+
+    tomorrow:
+      canonical: tomorrow
+      aliases:
+        - 내일
+        - 익일
+      offset_days: 1
+      resolver: resolve_relative_date
+
+    day_after_tomorrow:
+      canonical: day_after_tomorrow
+      aliases:
+        - 모레
+      offset_days: 2
+      resolver: resolve_relative_date
+
+policies:
+  relative_date:
+    llm_must_not_resolve_to_calendar_date: true
+    preserve_original_text: true
+    canonical_value_required: true
+    tool_request_required: true
+    reject_unknown_alias: true
+
+  evidence:
+    expression_must_exist_in_user_input: true
+    invented_date_expression_forbidden: true
+

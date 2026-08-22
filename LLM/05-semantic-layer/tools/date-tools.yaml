@@ -1,0 +1,64 @@
+tool_registry:
+  version: 1
+
+  tools:
+    resolve_relative_date:
+      description: >-
+        Canonical relative-date expression을 Application이 제공한
+        기준 시각과 Workspace timezone을 사용해 YYYY-MM-DD 날짜로 계산한다.
+
+      execution:
+        owner: application_core
+        deterministic: true
+        network_access: false
+        filesystem_access: false
+        llm_can_execute: false
+
+      input:
+        expression:
+          type: string
+          enum:
+            - today
+            - tomorrow
+            - day_after_tomorrow
+          source: semantic_parse
+          required: true
+
+        reference_datetime:
+          type: datetime
+          source: application
+          required: true
+
+        timezone:
+          type: iana_timezone
+          source: workspace
+          required: true
+
+      output:
+        resolved_date:
+          type: date
+          format: YYYY-MM-DD
+          required: true
+
+        canonical_expression:
+          type: string
+          required: true
+
+        reference_datetime:
+          type: datetime
+          required: true
+
+        timezone:
+          type: iana_timezone
+          required: true
+
+      errors:
+        - code: UNSUPPORTED_EXPRESSION
+          recoverable: true
+        - code: MISSING_REFERENCE_DATETIME
+          recoverable: true
+        - code: MISSING_TIMEZONE
+          recoverable: true
+        - code: INVALID_TIMEZONE
+          recoverable: true
+

@@ -4,6 +4,11 @@ CPU 기반 Local LLM의 도움을 받아 일정과 업무를 관리하는 Local-
 
 사용자는 일반 일정관리 UI에서 Project, Task와 Event를 직접 관리할 수 있고, 자연어로 요청해 Local LLM이 일정 명령을 구조화하도록 할 수도 있다.
 
+```text
+직접 입력: Form · Home · Priority · Gantt · Calendar
+자연어 입력: 사용자 문장 → Local LLM Intent → 검증 → Preview → 사용자 확인 → 저장
+```
+
 ```mermaid
 flowchart LR
     U[사용자] --> M[직접 입력]
@@ -38,6 +43,17 @@ My Planner는 인터넷, 계정과 원격 AI API를 필수로 요구하지 않�
 
 사용자는 Home, Priority, Gantt, Calendar와 상세 화면을 통해 일정을 직접 관리한다.
 
+```text
+사용자 입력
+→ UI Validation
+→ Tauri IPC
+→ Rust Core Validation
+→ Domain Operation
+→ Markdown Atomic Commit
+→ SQLite Projection
+→ UI Refresh
+```
+
 ```mermaid
 flowchart LR
     A[사용자 입력] --> B[UI Validation]
@@ -52,6 +68,18 @@ flowchart LR
 ### 자연어 입력
 
 Local LLM은 사용자의 문장을 실제 저장 명령으로 직접 실행하지 않는다. 제한된 Intent와 arguments를 추출하는 parser 역할만 담당한다.
+
+```text
+사용자 자연어
+→ Local LLM 구조화 JSON
+→ Schema와 Allowlist 검증
+→ DateResolver와 대상 조회
+→ Domain Dry-run
+→ 변경 Preview
+→ 사용자 확인
+→ Version 재검증
+→ Markdown과 Index 반영
+```
 
 ```mermaid
 flowchart LR
@@ -100,6 +128,21 @@ flowchart LR
 
 ## 기술 구성
 
+```text
+React / TypeScript Desktop UI
+  Home · Priority · Gantt · Calendar · AI Preview
+                    │
+             Typed Tauri IPC
+                    │
+Rust Local Application Core
+  Workspace · Project · Task · Event · Schedule
+  DateResolver · Search · Validation · Transaction Coordinator
+        │                    │                    │
+ FileRepository        IndexRepository        LLMAdapter
+        │                    │                    │
+ Markdown Workspace      SQLite Cache      llama.cpp Sidecar
+```
+
 ```mermaid
 flowchart TB
     UI[React · TypeScript Desktop UI<br/>Home · Priority · Gantt · Calendar · AI Preview]
@@ -129,6 +172,15 @@ flowchart TB
 - Local model format: GGUF quantized model
 
 ## Domain 개요
+
+```text
+Workspace
+├ Project
+│  ├ Milestone, MVP에서는 선택적
+│  └ Task
+│     └ SubTask, Task.parent_id 사용
+└ Event, optional related_task_id / project_id
+```
 
 ```mermaid
 flowchart TB

@@ -6,6 +6,16 @@
 
 ## 목표
 
+```text
+사용자 자연어
+→ SLM Semantic Parse
+→ Canonical Concept
+→ Deterministic Tool
+→ Domain Validation
+→ Preview
+→ 사용자 확인
+```
+
 ```mermaid
 flowchart LR
     A[사용자 자연어] --> B[Semantic Parse]
@@ -57,6 +67,12 @@ SLM이 하지 않는 일:
 ## 핵심 설계 결정
 
 ### 실제 날짜를 SLM에 요구하지 않는다
+
+```text
+오늘 → today
+내일 → tomorrow
+모레 → day_after_tomorrow
+```
 
 ```mermaid
 flowchart LR
@@ -114,6 +130,12 @@ Tool이 계산한 날짜는 곧바로 파일에 저장되지 않는다. Intent�
 ## 현재 실험 범위
 
 첫 Run에서는 다음 표현만 평가한다.
+
+```text
+오늘 · 금일 → today
+내일 · 익일 → tomorrow
+모레 → day_after_tomorrow
+```
 
 ```mermaid
 flowchart LR

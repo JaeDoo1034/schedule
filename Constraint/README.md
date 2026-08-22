@@ -89,6 +89,18 @@ LLM은 다음 작업을 직접 수행하지 않는다.
 
 기본 처리 경계는 다음과 같다.
 
+```text
+사용자 자연어
+→ LLM Intent 추출
+→ Schema와 allowlist 검증
+→ DateResolver와 대상 조회
+→ Domain dry-run validation
+→ 변경 Preview
+→ 사용자 확인
+→ version 재검증
+→ Domain operation과 저장
+```
+
 ```mermaid
 flowchart LR
     A[사용자 자연어] --> B[LLM Intent 추출]

@@ -31,6 +31,23 @@ LLM/
 
 ## 문서 분류 기준
 
+```text
+llama.cpp를 어떻게 실행하는가?
+└─ 01-llama-cpp-guide/
+
+실제로 언제, 어떤 모델로, 무엇을 실행했고 결과가 어땠는가?
+└─ 02-test-runs/
+
+어떤 테스트를 만들고 어떻게 합격 여부를 판단하는가?
+└─ 03-test-case-design/
+
+실험 결과를 어떤 논문과 연구 개념으로 해석하는가?
+└─ 04-references/
+
+자연어 의미와 결정적 Tool 실행 경계를 어떻게 정의하는가?
+└─ 05-semantic-layer/
+```
+
 ```mermaid
 flowchart TB
     Q{문서의 핵심 질문}

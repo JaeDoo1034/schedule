@@ -20,6 +20,17 @@ YAML을 새로 만들거나 기존 Concept를 확장하기 전에 반드시 [Sem
 
 ## 변경 순서
 
+```text
+요구사항 정의
+→ Concept와 canonical 이름 결정
+→ alias 및 필요한 context 정의
+→ resolver/Tool 계약 연결
+→ policy 정의
+→ Schema와 Application validator 반영
+→ 정상·별칭·경계·거부 테스트 추가
+→ 문서와 version 갱신
+```
+
 ```mermaid
 flowchart LR
     A[요구사항 정의] --> B[Concept · canonical 결정]

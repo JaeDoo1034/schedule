@@ -11,6 +11,17 @@
 
 ## 공통 처리 원칙
 
+```text
+User Action
+→ UI Validation
+→ Tauri IPC
+→ Core Validation
+→ Domain Operation
+→ Atomic Markdown Commit
+→ SQLite Projection
+→ UI Refresh/Event
+```
+
 ```mermaid
 flowchart LR
     A[사용자 행동] --> B[UI 입력 검증]
